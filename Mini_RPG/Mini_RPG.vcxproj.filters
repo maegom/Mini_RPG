@@ -18,6 +18,9 @@
     <ClCompile Include="InventoryManager.cpp">
       <Filter>04.Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="Store.cpp">
+      <Filter>03.Store</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="info.h" />
@@ -35,6 +38,9 @@
     </ClInclude>
     <ClInclude Include="InventoryManager.h">
       <Filter>04.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Store.h">
+      <Filter>03.Store</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

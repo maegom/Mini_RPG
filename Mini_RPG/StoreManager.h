@@ -1,5 +1,5 @@
 #pragma once
-#include "info.h"
+#include "Store.h"
 
 enum class EStoreMenu
 {
@@ -19,8 +19,12 @@ public :
 private:
 	EStoreMenu Menu();
 
+	CStore* mStore;
+
+
 public:
-	bool Init();
-	void Run();
+	bool Init(ItemArray* store);
+	void Run(ItemArray* store);
+
 };
 

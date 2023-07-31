@@ -3,7 +3,9 @@
 //객체 생성시 호출
 CGameManager::CGameManager() :
 	mBattleMgr(nullptr),  //초기화 
-	mStoreMgr(nullptr) 
+	mStoreMgr(nullptr),
+	mInventory(nullptr)
+
 {
 	
 }
@@ -24,6 +26,13 @@ CGameManager::~CGameManager()
 		//동적할당 제거 및 초기화
 		delete 	mStoreMgr;
 		mStoreMgr = nullptr;
+
+	}
+	if (mInventory)
+	{
+		//동적할당 제거 및 초기화
+		delete 	mInventory;
+		mInventory = nullptr;
 
 	}
 	
@@ -52,22 +61,26 @@ EMainMenu CGameManager::Menu()
 }
 
 //초기화
-bool CGameManager::Init()
+bool CGameManager::Init(ItemArray* store, ItemArray* Inventory)
 {
 	// 전투 관리자 클래스 생성과 초기화
 	mBattleMgr = new CBattleManager;
 	mStoreMgr = new CStoreManager;
+	mInventory = new CInventoryManager;
 
 	if (!mBattleMgr->Init())
 		return false;
-	if (!mStoreMgr->Init())
+	if (!mStoreMgr->Init(store))
+		return false;
+
+	if (!mInventory->Init(Inventory))
 		return false;
 
 	return true;
 }
 
 //실행
-void CGameManager::Run()
+void CGameManager::Run(ItemArray* store, ItemArray* Inventory)
 {
 	while (true)
 	{
@@ -78,14 +91,28 @@ void CGameManager::Run()
 			mBattleMgr-> Run();
 			break;
 		case EMainMenu::Store:
-			mStoreMgr->Run();
+			mStoreMgr->Run(store);
 			break;
 		case EMainMenu::Inventory:
+			mInventory->Run(Inventory);
 			break;
 		case EMainMenu::Exit:
 			return;
 	
 		}
 
+	}
+}
+
+void CGameManager::Destroy(ItemArray* store, ItemArray* Inventory)
+{
+	for (int i = 0; i < store->Count; ++i)
+	{
+		delete store->ItemList[i];
+	}
+
+	for (int i = 0; i < store->Count; ++i)
+	{
+		delete Inventory->ItemList[i];
 	}
 }

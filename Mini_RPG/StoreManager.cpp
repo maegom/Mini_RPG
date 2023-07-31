@@ -1,11 +1,17 @@
 #include "StoreManager.h"
 
-CStoreManager::CStoreManager()
+CStoreManager::CStoreManager() :
+	mStore(nullptr)
 {
 }
 
 CStoreManager::~CStoreManager()
 {
+	if (mStore)
+	{
+		delete mStore;
+		mStore = nullptr;
+	}
 }
 
 EStoreMenu CStoreManager::Menu()
@@ -27,20 +33,24 @@ EStoreMenu CStoreManager::Menu()
 }
 
 
-bool CStoreManager::Init()
+bool CStoreManager::Init(ItemArray* store)
 {
+	mStore = new CStore;
+
+	if (!mStore->Init(store))
+		return false;
+
     return true;
 }
 
-void CStoreManager::Run()
+void CStoreManager::Run(ItemArray* store)
 {
 	while (true)
 	{
 		switch (Menu())
 		{
-		case EStoreMenu::None:
-			break;
 		case EStoreMenu::Buy:
+			mStore->Run(store);
 			break;
 		case EStoreMenu::Sell:
 			break;

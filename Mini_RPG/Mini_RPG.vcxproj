@@ -133,6 +133,7 @@
     <ClCompile Include="info.cpp" />
     <ClCompile Include="InventoryManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Store.cpp" />
     <ClCompile Include="StoreManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="info.h" />
     <ClInclude Include="InventoryManager.h" />
+    <ClInclude Include="Store.h" />
     <ClInclude Include="StoreManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
