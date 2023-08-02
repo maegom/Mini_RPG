@@ -1,9 +1,8 @@
 #pragma once
 
-#include "BattleManager.h"
-#include "StoreManager.h"
-#include "InventoryManager.h"
+#include "Info.h"
 
+//메인 메뉴
 enum class EMainMenu
 {
 	None,
@@ -13,23 +12,40 @@ enum class EMainMenu
 	Exit
 };
 
+//게임 매니저 클래스
 class CGameManager
 {
-public:
+private:
 	CGameManager();
 	~CGameManager();
 
-	bool Init(ItemArray* store, ItemArray* Inventory);
-	void Run(ItemArray* store, ItemArray* Inventory);
-	void Destroy(ItemArray* store, ItemArray* Inventory);
-
+	//동적할당 및 제거
 private:
-	// 메뉴
+	static CGameManager* mInst;
+
+public:
+	static CGameManager* GetInst()
+	{
+		if (nullptr == mInst)
+			mInst = new CGameManager;
+
+		return mInst;
+	}
+
+	static void DestroyInst()
+	{
+		if (nullptr != mInst)
+		{
+			delete mInst;
+			mInst = nullptr;
+		}
+	}
+//메뉴 출력 함수
+private:
 	EMainMenu Menu();
 
-	//전투 매니저 선언
-	CBattleManager* mBattleMgr;
-
-	CStoreManager* mStoreMgr;
-	CInventoryManager* mInventory;
+public:
+	bool Init();
+	void Run();
 };
+

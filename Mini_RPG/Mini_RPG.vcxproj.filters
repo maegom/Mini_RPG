@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="info.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameManager.cpp">
       <Filter>01.GameManager</Filter>
@@ -13,13 +12,25 @@
       <Filter>02.Battle</Filter>
     </ClCompile>
     <ClCompile Include="StoreManager.cpp">
-      <Filter>03.Store</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoryManager.cpp">
-      <Filter>04.Inventory</Filter>
+      <Filter>04.Store</Filter>
     </ClCompile>
     <ClCompile Include="Store.cpp">
-      <Filter>03.Store</Filter>
+      <Filter>04.Store</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>03.ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>03.ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>03.ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>04.Store</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>04.Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,13 +45,25 @@
       <Filter>01.GameManager</Filter>
     </ClInclude>
     <ClInclude Include="StoreManager.h">
-      <Filter>03.Store</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryManager.h">
-      <Filter>04.Inventory</Filter>
+      <Filter>04.Store</Filter>
     </ClInclude>
     <ClInclude Include="Store.h">
-      <Filter>03.Store</Filter>
+      <Filter>04.Store</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>03.ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>03.ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>03.ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>04.Store</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>04.Inventory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,11 +73,14 @@
     <Filter Include="02.Battle">
       <UniqueIdentifier>{d1715fd3-5aea-4deb-9b03-02bbbc80bb2e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03.Store">
-      <UniqueIdentifier>{a51c4df1-6499-4c4a-84ef-7ab7f3e25ed6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.Inventory">
       <UniqueIdentifier>{4cccf835-db53-44e4-83de-2de977d7ebe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.ObjectManager">
+      <UniqueIdentifier>{7df1f850-8da1-4254-bef8-6c3e39762581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Store">
+      <UniqueIdentifier>{a51c4df1-6499-4c4a-84ef-7ab7f3e25ed6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

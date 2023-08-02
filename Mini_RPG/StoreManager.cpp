@@ -1,24 +1,23 @@
 #include "StoreManager.h"
+#include "Store.h"
+
+CStoreManager* CStoreManager::mInst = nullptr;
 
 CStoreManager::CStoreManager() :
-	mStore(nullptr)
+	mStore{}
 {
 }
 
 CStoreManager::~CStoreManager()
-{
-	if (mStore)
-	{
-		delete mStore;
-		mStore = nullptr;
-	}
+{ 
 }
 
+//상점 메뉴
 EStoreMenu CStoreManager::Menu()
 {
 	system("cls");
-	std::cout << "1. 구매" << std::endl;
-	std::cout << "2. 팔기" << std::endl;
+	std::cout << "1. 무기" << std::endl;
+	std::cout << "2. 방어구" << std::endl;
 	std::cout << "3. 뒤로가기" << std::endl;
 	std::cout << "메뉴를 선택하세요 : ";
 	int	Input;
@@ -32,27 +31,32 @@ EStoreMenu CStoreManager::Menu()
 	return (EStoreMenu)Input;
 }
 
-
-bool CStoreManager::Init(ItemArray* store)
+//상점 아이템 파일입력
+bool CStoreManager::Init()
 {
-	mStore = new CStore;
+	const char* FileNameArray[2] = { "ItemList.itl","ItemList.itl" };
 
-	if (!mStore->Init(store))
+	for (int i = 0; i < 2; i++)
+	{
+		mStore[i] = new CStore;
+		if (!mStore[i]->Init("ItemList.itl"))
 		return false;
-
+	}
     return true;
 }
 
-void CStoreManager::Run(ItemArray* store)
+//실행
+void CStoreManager::Run()
 {
 	while (true)
 	{
 		switch (Menu())
 		{
-		case EStoreMenu::Buy:
-			mStore->Run(store);
+		case EStoreMenu::Weapon:
+			mStore[0]->Run();
 			break;
-		case EStoreMenu::Sell:
+		case EStoreMenu::Armor:
+			mStore[1]->Run();
 			break;
 		case EStoreMenu::Back:
 			return;

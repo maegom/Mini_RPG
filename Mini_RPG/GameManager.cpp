@@ -1,41 +1,22 @@
-#include "GameManager.h" 
+#include "GameManager.h"
+#include "BattleManager.h"
+#include "ObjectManager.h" 
+#include "StoreManager.h" 
+#include "Inventory.h"
+
+CGameManager* CGameManager::mInst = nullptr; 
 
 //객체 생성시 호출
-CGameManager::CGameManager() :
-	mBattleMgr(nullptr),  //초기화 
-	mStoreMgr(nullptr),
-	mInventory(nullptr)
-
-{
-	
+CGameManager::CGameManager() 
+{	
 }
 
 //객체 제거시 호출
 CGameManager::~CGameManager() 
 {
-	if (mBattleMgr)
-	{
-		//동적할당 제거 및 초기화
-		delete 	mBattleMgr;
-		mBattleMgr = nullptr;
-
-	}
-
-	if (mStoreMgr)
-	{
-		//동적할당 제거 및 초기화
-		delete 	mStoreMgr;
-		mStoreMgr = nullptr;
-
-	}
-	if (mInventory)
-	{
-		//동적할당 제거 및 초기화
-		delete 	mInventory;
-		mInventory = nullptr;
-
-	}
-	
+	CObjectManager::DestroyInst();
+	CBattleManager::DestroyInst();
+	CStoreManager::DestroyInst();
 }
 
 //첫 메뉴 출력
@@ -60,59 +41,48 @@ EMainMenu CGameManager::Menu()
 	return (EMainMenu)Input;
 }
 
+
+
 //초기화
-bool CGameManager::Init(ItemArray* store, ItemArray* Inventory)
+bool CGameManager::Init()
 {
+	// 오브젝트 관리자 초기화
+	if (!CObjectManager::GetInst()->Init())
+		return false;
+
 	// 전투 관리자 클래스 생성과 초기화
-	mBattleMgr = new CBattleManager;
-	mStoreMgr = new CStoreManager;
-	mInventory = new CInventoryManager;
-
-	if (!mBattleMgr->Init())
-		return false;
-	if (!mStoreMgr->Init(store))
+	if (!CBattleManager::GetInst()->Init())
 		return false;
 
-	if (!mInventory->Init(Inventory))
+	//상점 관리가 클래스 생성과 초기화 
+	if (!CStoreManager::GetInst()->Init())
+		return false;
+	// 인벤토리 초기화
+	if (!CInventory::GetInst()->Init())
 		return false;
 
+ 
 	return true;
 }
 
 //실행
-void CGameManager::Run(ItemArray* store, ItemArray* Inventory)
+void CGameManager::Run()
 {
 	while (true)
 	{
-		//첫 메뉴 입력값에 따른 분기
 		switch (Menu())
 		{
 		case EMainMenu::Battle:
-			mBattleMgr-> Run();
+			CBattleManager::GetInst()->Run();
 			break;
 		case EMainMenu::Store:
-			mStoreMgr->Run(store);
+			CStoreManager::GetInst()->Run();
 			break;
 		case EMainMenu::Inventory:
-			mInventory->Run(Inventory);
+			CInventory::GetInst()->Run();
 			break;
 		case EMainMenu::Exit:
 			return;
-	
 		}
-
-	}
-}
-
-void CGameManager::Destroy(ItemArray* store, ItemArray* Inventory)
-{
-	for (int i = 0; i < store->Count; ++i)
-	{
-		delete store->ItemList[i];
-	}
-
-	for (int i = 0; i < store->Count; ++i)
-	{
-		delete Inventory->ItemList[i];
 	}
 }

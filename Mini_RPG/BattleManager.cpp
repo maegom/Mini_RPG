@@ -1,6 +1,12 @@
 #include "BattleManager.h"
+// 실제 Battle 클래스를 사용해야 하기 때문에 include를 해준다.
+#include "Battle.h"
 
-CBattleManager::CBattleManager()
+//전투 매니저 초기화
+CBattleManager* CBattleManager::mInst = nullptr;
+
+CBattleManager::CBattleManager() :
+	mBattle{}
 {
 }
 
@@ -8,12 +14,8 @@ CBattleManager::~CBattleManager()
 {
 }
 
-bool CBattleManager::Init()
-{
-	return true;
-}
-
-EBattleMenu CBattleManager::Menu()
+//전투 등급 메뉴
+EBattleLevelMenu CBattleManager::Menu()
 {
 	system("cls");
 	std::cout << "1. 쉬움" << std::endl;
@@ -21,36 +23,49 @@ EBattleMenu CBattleManager::Menu()
 	std::cout << "3. 어려움" << std::endl;
 	std::cout << "4. 뒤로가기" << std::endl;
 	std::cout << "메뉴를 선택하세요 : ";
+	int	Input;
 
-	// 선택값 입력
-	int Input;
 	std::cin >> Input;
 
-	//입력 오류 예외처리
-	if (Input <= (int)EBattleMenu::None || Input > (int)EBattleMenu::Back)
-		return EBattleMenu::None;
+	if (Input <= (int)EBattleLevelMenu::None ||
+		Input > (int)EBattleLevelMenu::Back)
+		return EBattleLevelMenu::None;
 
-	//입력시 입력값 반환
-	return (EBattleMenu)Input;
+	return (EBattleLevelMenu)Input;
 }
 
-//실행
+// 전투 등급에 따른 분류
+bool CBattleManager::Init()
+{
+	// 전투 3개를 모두 생성해둔다.
+	for (int i = 0; i < 3; ++i)
+	{
+		mBattle[i] = new CBattle;
+
+		mBattle[i]->Init((EBattleType)i);
+	}
+
+	return true;
+}
+
+//메뉴 선택에 따른 실행
 void CBattleManager::Run()
 {
 	while (true)
 	{
 		switch (Menu())
 		{
-
-		case EBattleMenu::Easy:
+		case EBattleLevelMenu::Easy:
+			mBattle[0]->Run();
 			break;
-		case EBattleMenu::Normal:
+		case EBattleLevelMenu::Normal:
+			mBattle[1]->Run();
 			break;
-		case EBattleMenu::Hard:
+		case EBattleLevelMenu::Hard:
+			mBattle[2]->Run();
 			break;
-		case EBattleMenu::Back:
+		case EBattleLevelMenu::Back:
 			return;
 		}
 	}
 }
-

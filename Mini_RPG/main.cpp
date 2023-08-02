@@ -2,22 +2,15 @@
 
 int main()
 {
-	//게임 매니저 클라스 생성
-	CGameManager Mgr;
+	if (CGameManager::GetInst()->Init() == false)
+	{
+		CGameManager::DestroyInst();
+		return 0;
+	}
 
-	//상점, 가방, 플레이어 공간 초기화
-	ItemArray	store = {};
-	ItemArray	Inventory = {};
-	Player	player = {};
+	CGameManager::GetInst()->Run();
 
-
-	//초기화 
-	Mgr.Init(&store,&Inventory);
-
-	//실행
-	Mgr.Run(&store, &Inventory);
-
-	Mgr.Destroy(&store, &Inventory);
+	CGameManager::DestroyInst();
 
 	return 0;
 }

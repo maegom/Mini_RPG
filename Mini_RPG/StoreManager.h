@@ -1,30 +1,51 @@
 #pragma once
-#include "Store.h"
+
+#include "Info.h"
 
 enum class EStoreMenu
 {
 	None,
-	Buy,
-	Sell,
+	Weapon,
+	Armor,
 	Back
-
 };
 
 class CStoreManager
 {
-public :
+private:
 	CStoreManager();
 	~CStoreManager();
 
 private:
-	EStoreMenu Menu();
-
-	CStore* mStore;
-
+	static CStoreManager* mInst;
 
 public:
-	bool Init(ItemArray* store);
-	void Run(ItemArray* store);
+	static CStoreManager* GetInst()
+	{
+		if (nullptr == mInst)
+			mInst = new CStoreManager;
 
+		return mInst;
+	}
+
+	static void DestroyInst()
+	{
+		if (nullptr != mInst)
+		{
+			delete mInst;
+			mInst = nullptr;
+		}
+	}
+
+private:
+	class CStore* mStore[2];
+
+
+private:
+	EStoreMenu Menu();
+
+public:
+	bool Init();
+	void Run();
 };
 
