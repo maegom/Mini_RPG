@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Item.h"
 
 //플레이어 클래스 호출 함수. 변수 초기화
 CPlayer::CPlayer() :
@@ -12,12 +13,64 @@ CPlayer::CPlayer() :
     mMPMax(0),
     mLevel(0),
     mExp(0),
-    mMoney(0)
+    mMoney(0),
+    mEquipItem {} //장착 아이템
 {
 }
 
+//장착아이템이 있으면 동적할당 제거
 CPlayer::~CPlayer()
 {
+    for (int i = 0; i < Equip_End; ++i)
+    {
+        if (nullptr != mEquipItem[i])
+            delete mEquipItem[i];
+    }
+}
+//공격력 호출
+int CPlayer::GetAttack()
+{
+    int Attack = mAttack;
+
+    // 방어력 = 플레이어 방어력 + 장비 방어력
+    if (nullptr != mEquipItem[Equip_Weapon])
+        Attack += mEquipItem[Equip_Weapon]->GetOption();
+
+    return Attack;
+}
+
+//방어력 호출
+int CPlayer::GetArmor()
+{
+    int Armor = mArmor;
+
+    // 방어력 = 플레이어 방어력 + 장비 방어력
+    if (nullptr != mEquipItem[Equip_Armor])
+        Armor += mEquipItem[Equip_Armor]->GetOption();
+
+    return Armor;
+}
+
+// 리턴이 true일 경우 장착, false일 경우 장착 실패이다.
+// 2번째 인자는 이중포인터이다. 즉 포인터 변수의 메모리 주소를 담고 있다.
+// 이를 역참조하게 되면 포인터 변수가 된다. 그래서 그 포인터 변수에 장착하고 있던
+// 아이템의 메모리 주소를 넘겨준다.
+bool CPlayer::Equip(CItem* ChangeItem, CItem** EquipItem)
+{
+    EEquipType Type = ChangeItem->GetEquipType();
+
+    if (Type == Equip_None)
+        return false;
+
+    // 기존에 장착하고 있던 아이템의 주소를 인자로 넘어온 포인터 변수에
+    // 대입해준다.
+    *EquipItem = mEquipItem[Type];
+
+    // 아이템을 교체한다.
+    mEquipItem[Type] = ChangeItem;
+
+
+    return true;
 }
 
 //초기화 
@@ -100,9 +153,46 @@ void CPlayer::Output()
         break;
     }
 
+    //레벨 경험치 공격력 출력
     std::cout << "레벨 : " << mLevel << "\t경험치 : " << mExp << std::endl;
-    std::cout << "공격력 : " << mAttack << "\t방어력 : " << mArmor << std::endl;
+    std::cout << "공격력 : " << mAttack;
+
+    // 장착무기가 있을 경우 무기의 공격력도 함께 표시해준다.
+    if (nullptr != mEquipItem[Equip_Weapon])
+        std::cout << " + " << mEquipItem[Equip_Weapon]->GetOption();
+
+    //방어력 출력 
+    std::cout << "\t방어력 : " << mArmor;
+
+    if (nullptr != mEquipItem[Equip_Armor])
+        std::cout << " + " << mEquipItem[Equip_Armor]->GetOption();
+
+    std::cout << std::endl;
+
+    //체력 마나 보유금액 장착무기 이름 출력 
     std::cout << "체력 : " << mHP << " / " << mHPMax << "\t마나 : " << mMP << " / " <<
         mMPMax << std::endl;
     std::cout << "보유금액 : " << mMoney << std::endl;
+    std::cout << "장착무기 : ";
+
+    if (nullptr != mEquipItem[Equip_Weapon])
+    {
+        std::cout << mEquipItem[Equip_Weapon]->GetName();
+    }
+
+    else
+        std::cout << "없음";
+
+    //장착 방어구 이름 출력
+    std::cout << "\t장착방어구 : ";
+
+    if (nullptr != mEquipItem[Equip_Armor])
+    {
+        std::cout << mEquipItem[Equip_Armor]->GetName();
+    }
+
+    else
+        std::cout << "없음";
+
+    std::cout << std::endl;
 }

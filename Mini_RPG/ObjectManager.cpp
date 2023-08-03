@@ -10,6 +10,7 @@ CObjectManager::CObjectManager() :
 {
 }
 
+//플레이어 동적할당 제거
 CObjectManager::~CObjectManager()
 {
 	if (mPlayer)
@@ -19,6 +20,7 @@ CObjectManager::~CObjectManager()
 	}
 }
 
+//플레이어 동적할당
 bool CObjectManager::Init()
 {
 	mPlayer = new CPlayer;

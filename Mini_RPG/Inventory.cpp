@@ -1,5 +1,7 @@
 #include "Inventory.h"
 #include "Item.h"
+#include "ObjectManager.h"
+#include "Player.h"
 
 CInventory* CInventory::mInst = nullptr;
 
@@ -19,6 +21,7 @@ CInventory::~CInventory()
 	}
 }
 
+//인벤토리 선택 메뉴
 int CInventory::Menu()
 {
 	system("cls");
@@ -37,7 +40,7 @@ int CInventory::Menu()
 
 	if (Input <= 0 ||
 		Input > mCount + 1)
-		return 0;
+		return -1;
 
 	return Input;
 }
@@ -47,8 +50,11 @@ bool CInventory::Init()
 	return true;
 }
 
+//인벤토리 실행
 void CInventory::Run()
 {
+	CPlayer* Player = CObjectManager::GetInst()->GetPlayer();
+
 	while (true)
 	{
 		int Input = Menu();
@@ -58,5 +64,31 @@ void CInventory::Run()
 
 		else if (Input == mCount + 1)
 			break;
+
+		int	ItemIndex = Input - 1;
+
+		CItem* ChangeItem = nullptr;
+
+		//아이템 장착
+		if (Player->Equip(mItemArray[ItemIndex], &ChangeItem))
+		{
+			// 이미 장착 아이템이 있을 경우
+			if (ChangeItem)
+			{
+				mItemArray[ItemIndex] = ChangeItem;
+			}
+
+			else
+			{
+				// 장착하고 있던 아이템이 없을 경우 인벤토리의 해당 칸부터
+				// 뒤에 있는 모든 아이템을 앞으로 1칸씩 이동시킨다.
+				for (int i = ItemIndex; i < mCount - 1; ++i)
+				{
+					mItemArray[i] = mItemArray[i + 1];
+				}
+
+				--mCount;
+			}
+		}
 	}
 }

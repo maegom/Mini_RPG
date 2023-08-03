@@ -19,19 +19,41 @@ public:
 private:
 	char		mName[32];
 	EItemType	mType;
+	EEquipType	mEquipType;
+	int			mOption;
 	int			mPrice;
 	int			mSell;
 
 public:
-	//아이템 가격 호출
+	//장비 이름 호출
+	const char* GetName()
+	{
+		return mName;
+	}
+
+	//장비 옵션 호출
+	int GetOption()
+	{
+		return mOption;
+	}
+
+	//장착 장비 종류 호출
+	EEquipType GetEquipType()
+	{
+		return mEquipType;
+	}
+
+	//가격 호출
 	int GetPrice()
 	{
 		return mPrice;
 	}
 
 public:
-	bool Init(const char* Name, EItemType Type, int Price, int Sell);
+	bool Init(const char* Name, EItemType Type, int Price, int Sell,
+		EEquipType EquipType = Equip_None);
 	bool Init(FILE* FileStream);
 	void Output();
 };
+
 

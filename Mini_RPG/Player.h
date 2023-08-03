@@ -31,19 +31,18 @@ private:
 	int		mLevel;
 	int		mExp;
 	int		mMoney;
+	class CItem* mEquipItem[Equip_End]; //장착 아이템
 
 	//private 변수 호출 및 수정 함수
 public:
+	
+	
+
 	//공격력 호출
-	int GetAttack()
-	{
-		return mAttack;
-	}
+	int GetAttack();
 	//방어력 호출
-	int GetArmor()
-	{
-		return mArmor;
-	}
+	int GetArmor();
+
 	//소지금 호출
 	int GetMoney()
 	{
@@ -88,6 +87,9 @@ public:
 		mHP = mHPMax;
 		mMP = mMPMax;
 	}
+	//장착 여부
+	bool Equip(class CItem* ChangeItem,
+		class CItem** EquipItem);
 
 public:
 	bool Init();

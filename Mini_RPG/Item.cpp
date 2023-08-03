@@ -5,7 +5,8 @@ CItem::CItem() :
 	mName{},
 	mType(EItemType::Weapon),
 	mPrice(0),
-	mSell(0)
+	mSell(0),
+	mOption(0)
 
 {
 }
@@ -24,7 +25,8 @@ CItem::~CItem()
 {
 }
 
-bool CItem::Init(const char* Name, EItemType Type, int Price, int Sell)
+bool CItem::Init(const char* Name, EItemType Type, int Price, int Sell,
+	EEquipType EquipType)
 {
 	return true;
 }
@@ -32,10 +34,15 @@ bool CItem::Init(const char* Name, EItemType Type, int Price, int Sell)
 //아이템 파일 로드
 bool CItem::Init(FILE* FileStream)
 {
-	fread(mName, sizeof(char), 32, FileStream);
-	fread(&mType, sizeof(EItemType), 1, FileStream);
-	fread(&mPrice, sizeof(int), 1, FileStream);
-	fread(&mSell, sizeof(int), 1, FileStream);
+	//항목별 파일 읽기
+	fread(mName, sizeof(char), 32, FileStream); //이름
+	fread(&mType, sizeof(EItemType), 1, FileStream); //무기 종류
+
+	fread(&mEquipType, sizeof(EEquipType), 1, FileStream); //장착 종류
+	fread(&mOption, sizeof(int), 1, FileStream); //옵션값
+
+	fread(&mPrice, sizeof(int), 1, FileStream); //가격
+	fread(&mSell, sizeof(int), 1, FileStream); 
 
 	return true;
 }
@@ -49,11 +56,15 @@ void CItem::Output()
 	{
 	case EItemType::Weapon:
 		std::cout << "무기\n";
+		std::cout << "공격력 : ";
 		break;
 	case EItemType::Armor:
 		std::cout << "방어구\n";
+		std::cout << "방어력 : ";
 		break;
 	}
+
+	std::cout << mOption << std::endl;
 
 	std::cout << "Price : " << mPrice << "\tSell : "
 		<< mSell << std::endl;
