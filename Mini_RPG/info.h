@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "Array.h"
 
 //아이템 저장공간 제한
 #define	ITEMARRAY_MAXCOUNT	10

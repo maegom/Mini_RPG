@@ -10,8 +10,7 @@ public:
 	~CStore();
 
 private:
-	class CItem* mItemArray;
-	int			mItemCount;
+	CArray<class CItem*>	mItemArray;
 
 private:
 	int Menu();

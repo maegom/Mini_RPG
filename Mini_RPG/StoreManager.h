@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Info.h"
+#include "Array.h"
 
 enum class EStoreMenu
 {

@@ -146,6 +146,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="BattleManager.h" />
     <ClInclude Include="GameManager.h" />

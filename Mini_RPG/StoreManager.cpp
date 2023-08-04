@@ -1,5 +1,5 @@
 #include "StoreManager.h"
-#include "Store.h"
+#include "Store.h" 
 
 CStoreManager* CStoreManager::mInst = nullptr;
 

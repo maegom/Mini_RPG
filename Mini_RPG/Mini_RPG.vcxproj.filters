@@ -65,6 +65,7 @@
     <ClInclude Include="Inventory.h">
       <Filter>05.Inventory</Filter>
     </ClInclude>
+    <ClInclude Include="Array.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01.GameManager">
