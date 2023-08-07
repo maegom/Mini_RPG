@@ -20,9 +20,6 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>03.ObjectManager</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>04.Store</Filter>
-    </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>05.Inventory</Filter>
     </ClCompile>
@@ -34,6 +31,18 @@
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>03.ObjectManager\01.Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>03.ObjectManager\02.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemArmor.cpp">
+      <Filter>03.ObjectManager\02.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemWeapon.cpp">
+      <Filter>03.ObjectManager\02.Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>03.ObjectManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,9 +65,6 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>03.ObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>04.Store</Filter>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>05.Inventory</Filter>
     </ClInclude>
@@ -71,6 +77,18 @@
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>03.ObjectManager\01.Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>03.ObjectManager\02.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemArmor.h">
+      <Filter>03.ObjectManager\02.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemWeapon.h">
+      <Filter>03.ObjectManager\02.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>03.ObjectManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +109,9 @@
     </Filter>
     <Filter Include="03.ObjectManager\01.Charactor">
       <UniqueIdentifier>{4cd9388d-d71c-418f-b893-ccf469321269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.ObjectManager\02.Item">
+      <UniqueIdentifier>{c6630dce-074a-4f52-9765-aad0fcc74593}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Info.h"
+#include "Object.h"
 
 enum class EItemType
 {
@@ -8,16 +8,16 @@ enum class EItemType
 	Armor
 };
 
-class CItem
+class CItem :
+	public CObject
 {
 public:
 	CItem();
 	CItem(const CItem& ref); //복사 생성자
-	~CItem();
+	virtual ~CItem();
 
 	//아이템 정보
-private:
-	char		mName[32];
+protected:
 	EItemType	mType;
 	EEquipType	mEquipType;
 	int			mOption;
@@ -52,8 +52,9 @@ public:
 public:
 	bool Init(const char* Name, EItemType Type, int Price, int Sell,
 		EEquipType EquipType = Equip_None);
-	bool Init(FILE* FileStream);
-	void Output();
+	virtual bool Init(FILE* FileStream);
+	virtual bool Init();
+	virtual void Output();
 };
 
 

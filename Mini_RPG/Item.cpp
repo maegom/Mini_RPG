@@ -1,8 +1,7 @@
 #include "Item.h"
 
 //아이템 클래스 초기화
-CItem::CItem() :
-	mName{},
+CItem::CItem() : 
 	mType(EItemType::Weapon),
 	mPrice(0),
 	mSell(0),
@@ -36,7 +35,6 @@ bool CItem::Init(FILE* FileStream)
 {
 	//항목별 파일 읽기
 	fread(mName, sizeof(char), 32, FileStream); //이름
-	fread(&mType, sizeof(EItemType), 1, FileStream); //무기 종류
 
 	fread(&mEquipType, sizeof(EEquipType), 1, FileStream); //장착 종류
 	fread(&mOption, sizeof(int), 1, FileStream); //옵션값
@@ -44,6 +42,11 @@ bool CItem::Init(FILE* FileStream)
 	fread(&mPrice, sizeof(int), 1, FileStream); //가격
 	fread(&mSell, sizeof(int), 1, FileStream); 
 
+	return true;
+}
+
+bool CItem::Init()
+{
 	return true;
 }
 

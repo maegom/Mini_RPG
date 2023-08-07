@@ -1,8 +1,9 @@
 #include "Store.h"
-#include "Item.h"
 #include "Inventory.h"
 #include "Player.h"
 #include "ObjectManager.h"
+#include "ItemWeapon.h"
+#include "ItemArmor.h"
 
 CStore::CStore()
 {
@@ -58,7 +59,20 @@ bool CStore::Init(const char* FileName)
 	//아이템 개수만큼 아이템 정보 입력
 	for (int i = 0; i < Count; ++i)
 	{
-		CItem* Item = new CItem;
+		EItemType	Type;
+		fread(&Type, sizeof(EItemType), 1, FileStream);
+
+		CItem* Item = nullptr;
+
+		switch (Type)
+		{
+		case EItemType::Weapon:
+			Item = new CItemWeapon;
+			break;
+		case EItemType::Armor:
+			Item = new CItemArmor;
+			break;
+		}
 
 		Item->Init(FileStream);
 
