@@ -20,17 +20,20 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>03.ObjectManager</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>03.ObjectManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>03.ObjectManager</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>04.Store</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>05.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>03.ObjectManager\01.Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>03.ObjectManager\01.Charactor</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>03.ObjectManager\01.Charactor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,12 +56,6 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>03.ObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>03.ObjectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>03.ObjectManager</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>04.Store</Filter>
     </ClInclude>
@@ -66,6 +63,15 @@
       <Filter>05.Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="Monster.h">
+      <Filter>03.ObjectManager\01.Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>03.ObjectManager\01.Charactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>03.ObjectManager\01.Charactor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01.GameManager">
@@ -82,6 +88,9 @@
     </Filter>
     <Filter Include="05.Inventory">
       <UniqueIdentifier>{4cccf835-db53-44e4-83de-2de977d7ebe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.ObjectManager\01.Charactor">
+      <UniqueIdentifier>{4cd9388d-d71c-418f-b893-ccf469321269}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

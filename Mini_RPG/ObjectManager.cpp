@@ -39,13 +39,13 @@ CMonster* CObjectManager::CreateMonster(EBattleType Type)
 	switch (Type)
 	{
 	case Easy:
-		Monster->Init("고블린", 25, 10, 100, 10, 1, 1000, 1000);
+		Monster->SetInfo("고블린", 25, 10, 100, 10, 1, 1000, 1000);
 		break;
 	case Normal:
-		Monster->Init("오크", 80, 50, 900, 100, 5, 8000, 8000);
+		Monster->SetInfo("오크", 80, 50, 900, 100, 5, 8000, 8000);
 		break;
 	case Hard:
-		Monster->Init("오우거", 200, 150, 2000, 1000, 10, 15000, 15000);
+		Monster->SetInfo("오우거", 200, 150, 2000, 1000, 10, 15000, 15000);
 		break;
 	}
 

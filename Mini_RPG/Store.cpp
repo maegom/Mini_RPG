@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "ObjectManager.h"
 
-CStore::CStore() 
+CStore::CStore()
 {
 }
 
@@ -53,7 +53,7 @@ bool CStore::Init(const char* FileName)
 	int Count = 0;
 	fread(&Count, sizeof(int), 1, FileStream); //아이템 개수 입력
 	// 위에서 읽어온 아이템의 수량만큼 동적배열로 할당해준다.
-	 
+
 
 	//아이템 개수만큼 아이템 정보 입력
 	for (int i = 0; i < Count; ++i)
@@ -75,7 +75,7 @@ void CStore::Run()
 {
 	CPlayer* Player = CObjectManager::GetInst()->GetPlayer();
 
-	while (true) 
+	while (true)
 	{
 		int Input = Menu();
 

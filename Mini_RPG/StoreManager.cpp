@@ -9,7 +9,7 @@ CStoreManager::CStoreManager() :
 }
 
 CStoreManager::~CStoreManager()
-{ 
+{
 }
 
 //상점 메뉴
@@ -40,9 +40,9 @@ bool CStoreManager::Init()
 	{
 		mStore[i] = new CStore;
 		if (!mStore[i]->Init("ItemList.itl"))
-		return false;
+			return false;
 	}
-    return true;
+	return true;
 }
 
 //실행
